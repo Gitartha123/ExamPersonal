@@ -21,23 +21,29 @@
     <div class="a1-container a1-padding-4 a1-margin " >
         <form method="post" action="{{route('q')}}">
             @csrf
+            @php
+                session_start();
+
+                $i = isset($_SESSION['i']) ? $_SESSION['i'] : 1;
+                echo '<labe>'.'Q:';
+                echo '<input type="text" value="'.$i++.'" readonly="true" style="width:20px;">';
+
+                $_SESSION['i'] = $i;
+            @endphp
             @foreach ($semester as $e)
-                <input type="text" name="qid" value="<?= $e; ?>" >
-            @endforeach
-            @foreach ($semester as $e)
-                <input type="text" name="semid" value="<?= $e; ?>" >
+                <input type="text" name="semid" value="<?= $e; ?>" style="display: none;">
             @endforeach
             @foreach ($subject as $e)
-                <input type="text" name="subcode" value="<?= $e; ?>" >
+                <input type="text" name="subcode" value="<?= $e; ?>" style="display: none;">
             @endforeach
             @foreach ($exam as $e)
-                <input type="text" name="examid" value="<?= $e; ?>" >
+                <input type="text" name="examid" value="<?= $e; ?>" style="display: none;">
             @endforeach
             @foreach ($qtype as $e)
-                <input type="text" name="qtype" value="<?= $e; ?>" >
+                <input type="text" name="qtype" value="<?= $e; ?>" style="display: none;">
             @endforeach
             @foreach ($noq as $e)
-                <input type="text" name="noq" value="<?= $e; ?>" >
+                <input type="text" name="noq" value="<?= $e; ?>" style="display: none;">
             @endforeach
             <table class="a1-table">
                 {{ csrf_field() }}

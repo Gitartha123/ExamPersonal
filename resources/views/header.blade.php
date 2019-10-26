@@ -9,6 +9,9 @@
                     <span class="a1-margin"><b>CLASS TEST</b>
                         <p ><h4><b style="color: red;">DEPARTMENT OF COMPUTER APPLICATION</b></h4></p>
                     </span>
+            @if(Session::has('message'))
+               <input type="text"value="{{Session::get('message')}}" style="background-color: red; color: white;" class="form-control a1-input a1-center">
+            @endif
         </div>
     </div>
 </div>

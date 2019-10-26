@@ -15,6 +15,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use App\question;
 use App\exam;
+use Illuminate\Support\Facades\Redirect;
+use Session;
 
 
 
@@ -59,12 +61,16 @@ class TeacherIndex extends Controller
             $semid = $request->input('semid');
             $qtype = $request->input('qtype');
             $noq = $request->input('noq');
-
-            return view('teacher.Question', [
-                    'exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype]
-            ]);
-
-
+            for($i=0;$i<=$noq;$i++) {
+                $qcount = question::where('examid', '=', $name)->where('subcode', '=', $subname)->where('semid', '=', $semid)->where('qtype', '=', $qtype)->count();
+                if ($noq-1 >= $qcount)
+                    return view('teacher.Question', ['exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype],
+                    ]);
+                else {
+                    Session::flash('message','Thank you!!! Your Question paper is submitted');
+                    return Redirect::to('/teacherpanel');
+                }
+            }
 
     }
 
@@ -74,12 +80,9 @@ class TeacherIndex extends Controller
         $semid = $request->input('semester');
         $qtype = $request->input('qtype');
         $noq = $request->input('noq');
-            return view('teacher.Question', [
-                'exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype], 'noq' => [$noq]
-            ]);
-
+                return view('teacher.Question', [
+                    'exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype], 'noq' => [$noq]
+                ]);
 
     }
-
-
 }
