@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::get('teacherpanel','TeacherIndex@TeacherIndex');
 Route::get('dropdownlist','TeacherIndex@getsemester')->name('Addpaper');
 Route::get('dropdownlist/getsubject/{id}','TeacherIndex@getsubject');
-Route::get('/','TeacherIndex@getexam');
+Route::post('/getvalue',array('uses'=>'TeacherIndex@postValue'))->name('getvalue');
+Route::post('/question',array('uses'=>'TeacherIndex@store'))->name('q');
+
+
 
 

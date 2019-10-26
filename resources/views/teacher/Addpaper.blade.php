@@ -12,10 +12,9 @@
             {
                 var dropboxvalue = document.getElementById('sub_select').value;
                 document.getElementById('sub_code').value = dropboxvalue;
-
             }
-
         </script>
+
     </head>
 
     <body>
@@ -24,31 +23,33 @@
             <div class="a1-row a1-center a1-red a1-margin"><b><h3>ADD PAPER</h3></b></div>
             <div class="a1-container a1-padding-4 a1-margin " >
                 <table class="a1-table" >
-                    {!! Form::open(['Route'=>'post.add','method'=>'post']) !!}
+                    <form method="post" action="{{ route('getvalue') }}">
+                        {{ csrf_field() }}
                         <tr>
                             <td >
                                 {!! Form::label('Exam','Select Examination:') !!}
                             </td>
                             <td>
-                                <select  name="exam" id="exam" class="form-control" style="width:100%">
-                                    <option>Select Examination</option>
-                                    @foreach ($posts as $post)
-                                        <option >{{ $post->examname }}</option>
+                                <select  name="exam" id="exam" class="form-control" style="width:100%" onkeyup="sync()">
+                                    <option>--Select Examination--</option>
+                                    @foreach ($posts as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </td>
                         </tr>
+
                         <tr>
                             <td>
                                 {!! Form::label('Semester','Select Semester:') !!}
                             </td>
                             <td>
                                 <select name="semester" class="form-control " style="width:100%">
-                                    <option value="">--- Select Semester ---</option>
+                                    <option value="">--Select Semester--</option>
                                     @foreach ($semester as $key => $value)
-                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    <option value="{{ $key }}">{{ $value }}</option>
                                     @endforeach
-                                </select>
+                                    </select>
                             </td>
                         </tr>
                         <tr>
@@ -57,7 +58,7 @@
                             </td>
                             <td>
                             <select name="subject" class="form-control" style="width:100%" id="sub_select" onChange="copyValue()" id="selectsubject">
-                                <option selected="selected" value=""/>
+                                <option>--Select Subject--</option>
                             </select>
                             </td>
                         </tr>
@@ -75,7 +76,7 @@
                                 {!! Form::label('Quetion type','','Question Type') !!}
                             </td>
                             <td>
-                                <select name="qtype" class="form-control">
+                                <select name="qtype" class="form-control" onchange="copyText()">
                                     <option readonly="true">--Select Question type--</option>
                                     <option>Subjective Question</option>
                                     <option >Objective Question</option>
@@ -95,10 +96,10 @@
                                 &nbsp;
                             </td>
                             <td>
-                                {!! Form::submit('submit',['class'=>'a1-button   a1-border a1-border-gray a1-right a1-round a1-hover-red']) !!}
+                                {!! Form::submit('NEXT',['class'=>"a1-round a1-right a1-hover-red a1-button a1-block a1-section a1-light-gray a1-ripple a1-padding",'style'=>'width:100px;']) !!}
                             </td>
                         </tr>
-                {!! Form::close() !!}
+                    </form>
                 </table>
             </div>
         </div>
