@@ -61,16 +61,17 @@ class TeacherIndex extends Controller
             $semid = $request->input('semid');
             $qtype = $request->input('qtype');
             $noq = $request->input('noq');
-            for($i=0;$i<=$noq;$i++) {
-                $qcount = question::where('examid', '=', $name)->where('subcode', '=', $subname)->where('semid', '=', $semid)->where('qtype', '=', $qtype)->count();
-                if ($noq-1 >= $qcount)
+                $qcount=0;
+                if ($noq-1  > $qcount) {
+                    $noq = $noq-1;
                     return view('teacher.Question', ['exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype],
                     ]);
+                }
                 else {
-                    Session::flash('message','Thank you!!! Your Question paper is submitted');
+                    Session::flash('message', 'Paper Submitted Successfully ');
                     return Redirect::to('/teacherpanel');
                 }
-            }
+
 
     }
 

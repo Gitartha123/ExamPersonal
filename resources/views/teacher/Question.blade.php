@@ -21,15 +21,7 @@
     <div class="a1-container a1-padding-4 a1-margin " >
         <form method="post" action="{{route('q')}}">
             @csrf
-            @php
-                session_start();
 
-                $i = isset($_SESSION['i']) ? $_SESSION['i'] : 1;
-                echo '<labe>'.'Q:';
-                echo '<input type="text" value="'.$i++.'" readonly="true" style="width:20px;">';
-
-                $_SESSION['i'] = $i;
-            @endphp
             @foreach ($semester as $e)
                 <input type="text" name="semid" value="<?= $e; ?>" style="display: none;">
             @endforeach
@@ -110,7 +102,7 @@
                         &nbsp;
                     </td>
                     <td>
-                        {!! Form::submit('NEXT',['class'=>"a1-round a1-right a1-hover-red a1-button a1-block a1-section a1-light-gray a1-ripple a1-padding",'style'=>'width:100px;','id'=>'myLink']) !!}
+                        {!! Form::submit('NEXT',['class'=>"a1-round a1-right a1-hover-red a1-button a1-block a1-section a1-light-gray a1-ripple a1-padding",'style'=>'width:100px;']) !!}
                     </td>
                 </tr>
             </table>

@@ -10,8 +10,8 @@
                         <p ><h4><b style="color: red;">DEPARTMENT OF COMPUTER APPLICATION</b></h4></p>
                     </span>
             @if(Session::has('message'))
-               <input type="text"value="{{Session::get('message')}}" style="background-color: red; color: white;" class="form-control a1-input a1-center">
-            @endif
+                    <input type="text" class="a1-input a1-center" value="{{ Session::get('message') }}" style="color: white;background-color: red;">
+             @endif
         </div>
     </div>
 </div>
