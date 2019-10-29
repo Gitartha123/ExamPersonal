@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <html>
 <head>
     <title>Addpaper</title>
@@ -21,7 +21,32 @@
     <div class="a1-container a1-padding-4 a1-margin " >
         <form method="post" action="{{route('q')}}">
             @csrf
-
+            @foreach ($qno as $e)
+                       <table>
+                           <tr>
+                               <td>Qno:</td>
+                               <td>
+                                   <input type="text" class="form-control a1-center" name="qno" value="<?= $e; ?>" style="width:80px;" readonly="true" required>
+                               </td>
+                               <td>&nbsp;</td>
+                               <td>&nbsp;</td>
+                               <td>&nbsp;</td>
+                               <td>&nbsp;</td>
+                               <td>Total Marks:</td>
+                               <td>
+                                   @foreach($total as $e)
+                                       <input type="text" class="form-control a1-center" name="total" value="<?= $e; ?>" style="width:80px;"readonly>
+                                       @endforeach
+                               </td>
+                               <td>/</td>
+                               <td>
+                                   @foreach($totalmarks as $e)
+                                       <input type="text" value="{{$e->totalmarks}}" class="form-control" name="totalmarks"style="width:80px;"readonly>
+                                       @endforeach
+                               </td>
+                           </tr>
+                       </table>
+                        @endforeach
             @foreach ($semester as $e)
                 <input type="text" name="semid" value="<?= $e; ?>" style="display: none;">
             @endforeach
@@ -92,7 +117,9 @@
                         {!! Form::label('Marks:','','option4') !!}
                     </td>
                     <td>
-                        {!! Form::text('mark','',['class'=>'form-control','placeholder'=>'Give mark']) !!}
+                        @foreach($mark as $e)
+                        <input type="text" class="form-control a1-center" name="mark" value="0" style="width:80px;">
+                        @endforeach
                     </td>
                 </tr>
             </table>

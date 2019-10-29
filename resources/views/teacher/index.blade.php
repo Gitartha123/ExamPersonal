@@ -23,7 +23,7 @@
               <div class="a1-card" style="width: 200px; height: 200px;">
                   <img src="resources/views/image/Question-paper.png" style="width: 200px; height: 200px;">
               </div>
-              <button class="a1-button a1-hover-red a1-margin a1-center">Deploy Paper</button>
+              <a href="{{route('deploy')}}" class="a1-button a1-hover-red a1-margin a1-center">Deploy Paper</a>
           </div>
 
           <div class="a1-half a1-border">

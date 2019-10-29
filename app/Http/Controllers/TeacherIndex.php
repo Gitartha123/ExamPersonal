@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 
@@ -33,27 +32,30 @@ class TeacherIndex extends Controller
         return view('teacher.Addpaper',compact('semester'))->with('posts', $posts);
     }
 
+
     public function getsubject($id)
     {
         $subject = DB::table("subject")->where("semester_id",$id)->pluck("subname",'code');
         return json_encode($subject);
     }
 
+
+
     public function store(Request $request){
             $addquestion=new question();
-            $addquestion->examid = $request->examid;
-            $addquestion->semid = $request->semid;
-            $addquestion->subcode =$request->subcode;
-            $addquestion->qtype = $request->qtype;
-            $addquestion->noq = $request->noq;
-            $addquestion->qtitle = $request->question;
-            $addquestion->option1 = $request->option1;
-            $addquestion->option2 = $request->option2;
-            $addquestion->option3 = $request->option3;
-            $addquestion->option4 = $request->option4;
-            $addquestion->coption = $request->coption;
-            $addquestion->mark = $request->mark;
-            $addquestion->save();
+        $addquestion->examid = $request->examid;
+        $addquestion->semid = $request->semid;
+        $addquestion->subcode =$request->subcode;
+        $addquestion->qtype = $request->qtype;
+        $addquestion->qtitle = $request->question;
+        $addquestion->option1 = $request->option1;
+        $addquestion->option2 = $request->option2;
+        $addquestion->option3 = $request->option3;
+        $addquestion->option4 = $request->option4;
+        $addquestion->coption = $request->coption;
+        $addquestion->mark = $request->mark;
+        $addquestion->qno = $request->qno;
+        $addquestion->save();
 
 
             $name = $request->get('examid');
@@ -61,12 +63,27 @@ class TeacherIndex extends Controller
             $semid = $request->input('semid');
             $qtype = $request->input('qtype');
             $noq = $request->input('noq');
+            $qno = $request->input('qno');
+            $mark = $request->input('mark');
+            $total = $request->input('total');
+            $totalmarks=exam::select('totalmarks')->where('id',$name)->get();
+            $t = $request->input('totalmarks');
                 $qcount=0;
-                if ($noq-1  > $qcount) {
-                    $noq = $noq-1;
-                    return view('teacher.Question', ['exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype],
-                    ]);
+                if (($noq-1  > $qcount)) {
+                    $total = $total+$mark;
+                    if($total > $t ){
+                        echo '<script>alert("Marks is out of range")</script>';
+                     
+                    }
+                    else {
+                       
+                        $noq = $noq - 1;
+                        $qno = $qno + 1;
+                        return view('teacher.Question', ['exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype], 'qno' => [$qno], 'total' => [$total], 'mark' => [$mark],'t'=>[$t]
+                        ])->with('totalmarks', $totalmarks);
+                    }
                 }
+
                 else {
                     Session::flash('message', 'Paper Submitted Successfully ');
                     return Redirect::to('/teacherpanel');
@@ -81,9 +98,12 @@ class TeacherIndex extends Controller
         $semid = $request->input('semester');
         $qtype = $request->input('qtype');
         $noq = $request->input('noq');
+        $qno = $request->input('qno');
+        $mark = $request->input('mark');
+        $total = $request->input('total');
+        $totalmarks=exam::select('totalmarks')->where('id',$name)->get();
                 return view('teacher.Question', [
-                    'exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype], 'noq' => [$noq]
-                ]);
-
+                    'exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype], 'noq' => [$noq],'qno'=>[$qno],'mark'=>[$mark],'total'=>[$total]
+                ])->with('totalmarks',$totalmarks);
     }
 }

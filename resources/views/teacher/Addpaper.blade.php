@@ -9,10 +9,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
         <!--Selected value inserted to text box-->
         <script type="text/javascript">
-            function copyValue()
-            {
+            function copyValue() {
                 var dropboxvalue = document.getElementById('sub_select').value;
                 document.getElementById('sub_code').value = dropboxvalue;
+
             }
         </script>
 
@@ -26,20 +26,21 @@
                 <table class="a1-table" >
                     <form method="post" action="{{ route('getvalue') }}">
                         {{ csrf_field() }}
+                        <input type="text" name="qno" id="qno" class="form-control" value="1" style="display: none;" readonly>
+                        <input type="text" name="mark" id="mark" class="form-control" value="0" style="display: none;" readonly>
+                        <input type="text" name="total" id="total" class="form-control" value="0" style="display: none;" readonly>
                         <tr>
                             <td >
                                 {!! Form::label('Exam','Select Examination:') !!}
                             </td>
                             <td>
-                                <select  name="exam" id="exam" class="form-control" style="width:100%" onkeyup="sync()">
+                                <select  name="exam" id="exam" class="form-control" style="width:100%" onkeyup="sync()" >
                                     <option>--Select Examination--</option>
                                     @foreach ($posts as $key => $value)
                                         <option value="{{ $key }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </td>
-                        </tr>
-
                         <tr>
                             <td>
                                 {!! Form::label('Semester','Select Semester:') !!}
@@ -58,7 +59,7 @@
                             <label for="subject" >Select Subject:</label>
                             </td>
                             <td>
-                            <select name="subject" class="form-control" style="width:100%" id="sub_select" onChange="copyValue()" id="selectsubject">
+                            <select name="subject" class="form-control" style="width:100%" id="sub_select" onChange="copyValue()" >
                                 <option>--Select Subject--</option>
                             </select>
                             </td>
@@ -136,6 +137,9 @@
         });
     });
 </script>
+
+
+
 
 
 
