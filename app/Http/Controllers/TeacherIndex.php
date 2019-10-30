@@ -42,7 +42,39 @@ class TeacherIndex extends Controller
 
 
     public function store(Request $request){
-            $addquestion=new question();
+            $name = $request->get('examid');
+            $subname=$request->input('subcode');
+            $semid = $request->input('semid');
+            $qtype = $request->input('qtype');
+            $noq = $request->input('noq');
+            $qno = $request->input('qno');
+            $mark = $request->input('mark');
+            $total = $request->input('total');
+            $totalmarks=exam::select('totalmarks')->where('id',$name)->get();
+            $t = $request->input('totalmarks');
+
+
+                    if($total < $t ){
+                        $total = $total+$mark;
+                        $qno = $qno + 1;
+                         if($total == $t){
+                             Session::flash('message', 'Paper Submitted Successfully ');
+                             return Redirect::to('/teacherpanel');
+                        }
+
+                         elseif($total > $t) {
+                             echo '<script>alert("Ooops!!!Total marks is out of range!!!Check now")</script>';
+                             return view('welcome');
+                         }
+                        else{
+                            return view('teacher.Question', ['exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype], 'qno' => [$qno], 'total' => [$total], 'mark' => [$mark], 't' => [$t]
+                            ])->with('totalmarks', $totalmarks);
+                        }
+                    }
+
+
+
+        $addquestion=new question();
         $addquestion->examid = $request->examid;
         $addquestion->semid = $request->semid;
         $addquestion->subcode =$request->subcode;
@@ -56,38 +88,6 @@ class TeacherIndex extends Controller
         $addquestion->mark = $request->mark;
         $addquestion->qno = $request->qno;
         $addquestion->save();
-
-
-            $name = $request->get('examid');
-            $subname=$request->input('subcode');
-            $semid = $request->input('semid');
-            $qtype = $request->input('qtype');
-            $noq = $request->input('noq');
-            $qno = $request->input('qno');
-            $mark = $request->input('mark');
-            $total = $request->input('total');
-            $totalmarks=exam::select('totalmarks')->where('id',$name)->get();
-            $t = $request->input('totalmarks');
-                $qcount=0;
-                if (($noq-1  > $qcount)) {
-                    $total = $total+$mark;
-                    if($total > $t ){
-                        echo '<script>alert("Marks is out of range")</script>';
-                     
-                    }
-                    else {
-                       
-                        $noq = $noq - 1;
-                        $qno = $qno + 1;
-                        return view('teacher.Question', ['exam' => [$name], 'subject' => [$subname], 'semester' => [$semid], 'noq' => [$noq], 'qtype' => [$qtype], 'qno' => [$qno], 'total' => [$total], 'mark' => [$mark],'t'=>[$t]
-                        ])->with('totalmarks', $totalmarks);
-                    }
-                }
-
-                else {
-                    Session::flash('message', 'Paper Submitted Successfully ');
-                    return Redirect::to('/teacherpanel');
-                }
 
 
     }

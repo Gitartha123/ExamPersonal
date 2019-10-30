@@ -85,14 +85,7 @@
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                {!! Form::label('No. of Questions','','noq') !!}
-                            </td>
-                            <td>
-                                {!! Form::text('noq','',['class'=>'form-control','placeholder'=>'Enter number of questions to be set']) !!}
-                            </td>
-                        </tr>
+
                         <tr>
                             <td>
                                 &nbsp;

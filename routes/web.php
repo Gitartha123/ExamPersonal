@@ -22,6 +22,7 @@ Route::post('/getvalue',array('uses'=>'TeacherIndex@postValue'))->name('getvalue
 Route::post('/question',array('uses'=>'TeacherIndex@store'))->name('q');
 Route::get('/deploy','DeployPaper@getsemester')->name('deploy');
 Route::get('dropdownlist/getsubject/{id}','DeployPaper@getsubject');
+Route::post('/deploy','DeployPaper@postValue')->name('deploy');
 
 
 
