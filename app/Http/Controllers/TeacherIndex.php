@@ -42,6 +42,21 @@ class TeacherIndex extends Controller
 
 
     public function store(Request $request){
+        $addquestion=new question();
+        $addquestion->examid = $request->examid;
+        $addquestion->semid = $request->semid;
+        $addquestion->subcode =$request->subcode;
+        $addquestion->qtype = $request->qtype;
+        $addquestion->qtitle = $request->question;
+        $addquestion->option1 = $request->option1;
+        $addquestion->option2 = $request->option2;
+        $addquestion->option3 = $request->option3;
+        $addquestion->option4 = $request->option4;
+        $addquestion->coption = $request->coption;
+        $addquestion->mark = $request->mark;
+        $addquestion->qno = $request->qno;
+        $addquestion->save();
+
             $name = $request->get('examid');
             $subname=$request->input('subcode');
             $semid = $request->input('semid');
@@ -74,20 +89,7 @@ class TeacherIndex extends Controller
 
 
 
-        $addquestion=new question();
-        $addquestion->examid = $request->examid;
-        $addquestion->semid = $request->semid;
-        $addquestion->subcode =$request->subcode;
-        $addquestion->qtype = $request->qtype;
-        $addquestion->qtitle = $request->question;
-        $addquestion->option1 = $request->option1;
-        $addquestion->option2 = $request->option2;
-        $addquestion->option3 = $request->option3;
-        $addquestion->option4 = $request->option4;
-        $addquestion->coption = $request->coption;
-        $addquestion->mark = $request->mark;
-        $addquestion->qno = $request->qno;
-        $addquestion->save();
+
 
 
     }

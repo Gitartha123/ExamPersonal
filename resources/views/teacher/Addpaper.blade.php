@@ -48,6 +48,7 @@
                             <td>
                                 <select name="semester" class="form-control " style="width:100%">
                                     <option value="">--Select Semester--</option>
+                                    @php $semester = DB::table('semester')->pluck("semester","id");@endphp
                                     @foreach ($semester as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
                                     @endforeach

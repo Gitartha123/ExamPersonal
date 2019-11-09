@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('teacherpanel','TeacherIndex@TeacherIndex');
+Route::get('/teacherpanel','TeacherIndex@TeacherIndex');
 Route::get('dropdownlist','TeacherIndex@getsemester')->name('Addpaper');
 Route::get('dropdownlist/getsubject/{id}','TeacherIndex@getsubject');
 Route::post('/getvalue',array('uses'=>'TeacherIndex@postValue'))->name('getvalue');
@@ -23,7 +23,27 @@ Route::post('/question',array('uses'=>'TeacherIndex@store'))->name('q');
 Route::get('/deploy','DeployPaper@getsemester')->name('deploy');
 Route::get('dropdownlist/getsubject/{id}','DeployPaper@getsubject');
 Route::post('/deploy','DeployPaper@postValue')->name('deploy');
+Route::post('/exam','HomeController@getExam')->name('exam');
 
 
 
 
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/login/custom',[
+    'uses'=>'LoginController@login',
+    'as' => 'login.custom'
+]);
+
+Route::group(['middleware'=>'auth'],function (){
+    Route::get('/home',function (){
+        return view('home');
+    })->name('home');
+
+    Route::get('/teacherpanel',function (){
+        return view('teacher.index');
+    })->name('teacherpanel');
+});

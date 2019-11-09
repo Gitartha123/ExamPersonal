@@ -1,6 +1,7 @@
 @extends('layout/master')
 @section('body')
   <div class=" a1-margin a1-container a1-light-gray" >
+      @include('layouts.app');
     <div class="a1-row">
       <div class="a1-half a1-border">
           <div class="a1-card a1-center" style="width: 200px; height: 200px;">

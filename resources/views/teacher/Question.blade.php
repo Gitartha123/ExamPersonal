@@ -20,7 +20,6 @@
         </div>
     <div class="a1-container a1-padding-4 a1-margin " >
         <form method="post" action="{{route('q')}}">
-            @csrf
             @foreach ($qno as $e)
                        <table>
                            <tr>
