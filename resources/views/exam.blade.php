@@ -3,6 +3,7 @@
 
     <div class=" a1-margin a1-container a1-light-gray" >
         @include('layouts.app');
+        a
      <form>
              @foreach($getquestions as $gq)
                 <h3><b class="a1-left">{{$gq->qno}}.</b></h3>
