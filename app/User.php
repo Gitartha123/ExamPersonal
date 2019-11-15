@@ -38,12 +38,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function is_admin(){
-        if ($this->usertype){
-            return true;
-        }
-            return false;
-    }
-
 
 }

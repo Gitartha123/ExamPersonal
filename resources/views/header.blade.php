@@ -11,8 +11,14 @@
                     </span>
 
             @if(Session::has('message'))
-                    <input type="text" class="a1-input a1-center" value="{{ Session::get('message') }}" style="color: white;background-color: red;">
+                    <input type="text" class="a1-input a1-center" value="{{ Session::get('message') }}" style="color: white;background-color: red;" readonly>
              @endif
+            @if(Session::has('getmessage'))
+                    <input type="text" class="a1-input a1-center" value="{{ Session::get('getmessage') }}" style="color: white;background-color: red;" readonly>
+               @endif
+            @if(Session::has('exammessage'))
+                <input type="text" class="a1-input a1-center" value="{{Session::get('exammessage')}}" readonly style="color: white;background-color: red;">
+                @endif
         </div>
     </div>
 </div>

@@ -24,9 +24,10 @@ Route::get('/deploy','DeployPaper@getsemester')->name('deploy');
 Route::get('dropdownlist/getsubject/{id}','DeployPaper@getsubject');
 Route::post('/deploy','DeployPaper@postValue')->name('deploy');
 Route::post('/exam','HomeController@getExam')->name('exam');
-
-
-
+Route::get('/Addsubject','HodController@Addsubject')->name('Addsubject');
+Route::post('/postvalue','HodController@storesubject')->name('postvalue');
+Route::get('/AddExam','HodController@Addexam')->name('AddExam');
+Route::post('/hodpanel','HodController@storexam')->name('postExamvalue');
 
 
 
@@ -46,4 +47,10 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('/teacherpanel',function (){
         return view('teacher.index');
     })->name('teacherpanel');
+
+    Route::get('/hodpanel',function (){
+        return view('HOD.index');
+    })->name('hodpanel');
+
+
 });
