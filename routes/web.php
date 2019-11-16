@@ -19,7 +19,7 @@ Route::get('/teacherpanel','TeacherIndex@TeacherIndex');
 Route::get('dropdownlist','TeacherIndex@getsemester')->name('Addpaper');
 Route::get('dropdownlist/getsubject/{id}','TeacherIndex@getsubject');
 Route::post('/getvalue',array('uses'=>'TeacherIndex@postValue'))->name('getvalue');
-Route::get('/question','TeacherIndex@store')->name('q');
+Route::post('/question',array('uses'=>'TeacherIndex@store'))->name('q');
 Route::get('/deploy','DeployPaper@getsemester')->name('deploy');
 Route::get('dropdownlist/getsubject/{id}','DeployPaper@getsubject');
 Route::post('/deploy','DeployPaper@postValue')->name('deploy');
