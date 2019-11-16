@@ -26,9 +26,10 @@
                 <table class="a1-table" >
                     <form method="post" action="{{ route('getvalue') }}">
                         {{ csrf_field() }}
+                        <input type="text" name="total" id="total" class="form-control" value="0" style="display: none;" readonly>
                         <input type="text" name="qno" id="qno" class="form-control" value="1" style="display: none;" readonly>
                         <input type="text" name="mark" id="mark" class="form-control" value="0" style="display: none;" readonly>
-                        <input type="text" name="total" id="total" class="form-control" value="0" style="display: none;" readonly>
+
                         <tr>
                             <td >
                                 {!! Form::label('Exam','Select Examination:') !!}

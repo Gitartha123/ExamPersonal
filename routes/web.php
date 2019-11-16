@@ -19,7 +19,7 @@ Route::get('/teacherpanel','TeacherIndex@TeacherIndex');
 Route::get('dropdownlist','TeacherIndex@getsemester')->name('Addpaper');
 Route::get('dropdownlist/getsubject/{id}','TeacherIndex@getsubject');
 Route::post('/getvalue',array('uses'=>'TeacherIndex@postValue'))->name('getvalue');
-Route::post('/question',array('uses'=>'TeacherIndex@store'))->name('q');
+Route::get('/question','TeacherIndex@store')->name('q');
 Route::get('/deploy','DeployPaper@getsemester')->name('deploy');
 Route::get('dropdownlist/getsubject/{id}','DeployPaper@getsubject');
 Route::post('/deploy','DeployPaper@postValue')->name('deploy');
@@ -28,6 +28,8 @@ Route::get('/Addsubject','HodController@Addsubject')->name('Addsubject');
 Route::post('/postvalue','HodController@storesubject')->name('postvalue');
 Route::get('/AddExam','HodController@Addexam')->name('AddExam');
 Route::post('/hodpanel','HodController@storexam')->name('postExamvalue');
+Route::get('viewpaper','TeacherIndex@viewpaper')->name('viewpaper');
+Route::post('viewquestion','TeacherIndex@searchQuestion')->name('viewquestion');
 
 
 
